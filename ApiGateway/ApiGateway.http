@@ -1,0 +1,13 @@
+@ApiGateway_HostAddress = https://localhost:7084
+
+GET {{ApiGateway_HostAddress}}/weatherforecast/
+Accept: application/json  
+
+
+###
+
+
+POST https://localhost:7084/api/Auth/login?username=admin&password=12345 
+Accept: application/json 
+
+###
