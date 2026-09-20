@@ -22,7 +22,15 @@
         }
       ],
       "UpstreamPathTemplate": "/api/product/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "AddHeadersToRequest": {
+        "X-TenantId": "Claims[TenantId] > value",
+        "X-UserId": "Claims[UserId] > value"
+      }
+
     },
     {
       "DownstreamPathTemplate": "/api/product/{everything}",
@@ -34,7 +42,34 @@
         }
       ],
       "UpstreamPathTemplate": "/product/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "AddHeadersToRequest": {
+        "X-TenantId": "Claims[TenantId] > value",
+        "X-UserId": "Claims[UserId] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Stock/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7147
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Stock/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "AddHeadersToRequest": {
+        "X-TenantId": "Claims[TenantId] > value",
+        "X-UserId": "Claims[UserId] > value"
+      }
+
     }
   ],
   "GlobalConfiguration": {
