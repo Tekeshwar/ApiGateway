@@ -10,7 +10,13 @@
         }
       ],
       "UpstreamPathTemplate": "/api/Auth/{everything}",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "POST" ],
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "60s",
+        "PeriodTimespan": 30,
+        "Limit": 10
+      }
     },
     {
       "DownstreamPathTemplate": "/api/product/{everything}",
@@ -29,8 +35,18 @@
       "AddHeadersToRequest": {
         "X-TenantId": "Claims[TenantId] > value",
         "X-UserId": "Claims[UserId] > value"
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "30s",
+        "PeriodTimespan": 30,
+        "Limit": 10
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 30000,
+        "TimeoutValue": 10000
       }
-
     },
     {
       "DownstreamPathTemplate": "/api/product/{everything}",
@@ -49,6 +65,12 @@
       "AddHeadersToRequest": {
         "X-TenantId": "Claims[TenantId] > value",
         "X-UserId": "Claims[UserId] > value"
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "30s",
+        "PeriodTimespan": 30,
+        "Limit": 10
       }
     },
     {
@@ -68,11 +90,23 @@
       "AddHeadersToRequest": {
         "X-TenantId": "Claims[TenantId] > value",
         "X-UserId": "Claims[UserId] > value"
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "30s",
+        "PeriodTimespan": 30,
+        "Limit": 15
       }
 
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:7000"
+    "BaseUrl": "https://localhost:7000",
+    "RateLimitOptions": {
+      "ClientIdHeader": "ClientId",
+      "QuotaExceededMessage": "Too many requests. Please try again later.",
+      "HttpStatusCode": 429,
+      "DisableRateLimitHeaders": false
+    }
   }
 }
